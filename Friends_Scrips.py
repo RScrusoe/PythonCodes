@@ -1,0 +1,5 @@
+fin = open('00.txt','r')
+out = open('All.htm','a')
+fileName = str(fin.readline())
+f = open(fileName,'r')
+print(f.read())

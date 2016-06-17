@@ -1,0 +1,16 @@
+a=range(25)
+for i in a:
+    print(i,end=" ")
+
+b=inclusive_range(25)
+for i in a:
+    print(i,end=" ")
+
+def inclusive_range(*args):
+    arglen = len(args)
+    if arglen < 1: raise TypeError("requiress at least 1 argument")
+    elif arglen == 1
+
+
+    i = start
+
