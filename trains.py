@@ -7,7 +7,7 @@ import csv
 file = open('trains.csv','r')
 reader = csv.reader(file)
 for row in reader:
-    print(row)
+    #print(row)
     break
 
 
@@ -159,7 +159,7 @@ def trains_between(start_code,stop_code):
             wr.writerow(row)
             print(row)
             ct+=1
-trains_between('cstm','dr')
+#trains_between('sbc','mas')
 
 
 
@@ -168,10 +168,13 @@ trains_between('cstm','dr')
 def find_station_code(name):
     infile = open('trains.csv','r')
     reader = csv.reader(infile)
+    l = []
     for i in reader:
         t = Train(i)
-        if name.lower() == t.station_name.lower() :
-            print(t.station_name)
-            return t.station_code
-find_station_code('delhi')
+        if name.lower() in t.station_name.lower() :
+        	if t.station_name + " => " + t.station_code not in l:
+        		l.append(t.station_name + " => " + t.station_code)
+    for i in l:
+    	print(i)    #return t.station_code
+find_station_code('')
 
