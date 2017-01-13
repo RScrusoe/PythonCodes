@@ -44,6 +44,7 @@ def make_soup(url):
     data = urllib.request.urlopen(req)
     soup = BeautifulSoup(data,'html.parser')
     return soup
+'''
 print("asdasdasd")
 url = 'https://twitter.com/GoogleFacts'
 soup = make_soup(url)
@@ -54,3 +55,25 @@ for a in soup.findAll('p',{'class':'TweetTextSize TweetTextSize--26px js-tweet-t
     print("##  ",end='')
     print(a.get_text())
 print('done!')
+'''
+
+
+next_url = 'https://en.wikipedia.org/wiki/Physics'
+
+heading = []
+
+while len(heading) < 25:
+    soup = make_soup(next_url)
+    for p in soup.findAll('div', {'id':'mw-content-text'}):
+        #print(p)
+        for a in p.findAll('span'):
+            x = a.find('a')
+            if x != None:
+                
+                
+                next_heading = x.get_text()
+                heading.append(next_heading)
+                print(next_heading,next_url)
+                next_url = 'https://en.wikipedia.org' + x['href']
+
+                break
