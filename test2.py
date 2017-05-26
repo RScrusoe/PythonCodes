@@ -16,12 +16,7 @@ import wikipedia
 #import cv2
 import numpy as np
 import matplotlib.pyplot as plt
-print(wikipedia.summary('mumbai',sentences=2))
-#img = cv2.imread('Titanic.jpg',cv2.IMREAD_GRAYSCALE)
-#cv2.imshow('image',img)
-#cv2.waitKey(0)
-#cv2.destroyAllWindows()
-#print(int(time.time()))
+
 user_agents = [
     'Mozilla/5.0 (Windows; U; Windows NT 5.1; it; rv:1.8.1.11) Gecko/20071127 Firefox/2.0.0.11',
     'Opera/9.25 (Windows NT 5.1; U; en)',
@@ -44,7 +39,27 @@ def make_soup(url):
     data = urllib.request.urlopen(req)
     soup = BeautifulSoup(data,'html.parser')
     return soup
-a = open('a.txt','a')
-for i in range(10):
-    a.write(i)
-a.close()
+
+url = "http://wits.worldbank.org/countrystats.aspx?lang=en"
+soup = make_soup(url)
+l = []
+for i in soup.findAll('h3',{"class":"countryHeading"}):
+    
+    for j in i.findAll('a'):
+        l.append([j.text,j['href']])
+#print(l)        ## Contains country name and their url
+
+for i in l:
+    url = i[1]
+    soup = make_soup(url)
+    tmp = []
+    for j in soup.findAll('td',{"class":"data  importIndicator alignRight"}):
+        tmp.append(j.text)
+    (l[l.index(i)]).append(tmp[0])
+    (l[l.index(i)]).append(tmp[1])
+    
+for i in l:
+    print(i)
+
+    
+    

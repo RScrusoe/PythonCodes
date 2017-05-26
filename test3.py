@@ -1,32 +1,31 @@
-import urllib.request
-import urllib
-from multiprocessing.dummy import Pool as ThreadPool 
+import threading
+from random import randint
+from time import sleep
 
-urls = [
-  'http://www.python.org', 
-  'http://www.python.org/about/',
-  'http://www.onlamp.com/pub/a/python/2003/04/17/metaclasses.html',
-  'http://www.python.org/doc/',
-  'http://www.python.org/download/',
-  'http://www.python.org/getit/',
-  'http://www.python.org/community/',
-  'https://wiki.python.org/moin/',
-  ]
 
-# Make the Pool of workers
-pool = ThreadPool(4) 
+def print_number(number):
+    # Sleeps a random 1 to 10 seconds
+    rand_int_var = randint(1, 10)
+    sleep(rand_int_var)
+    print ("Thread " + str(number) + " slept for " + str(rand_int_var) + " seconds")
 
-# Open the urls in their own threads
-# and return the results
-def f(link):
-    a = urllib.request.Request(link)
-    b= urllib.request.urlopen(link)
-    print(b)
-results = pool.map(f, urls)
+thread_list = []
 
-#close the pool and wait for the work to finish 
-pool.close() 
-pool.join()
+for i in range(1, 10):
+    # Instantiates the thread
+    # (i) does not make a sequence, so (i,)
+    t = threading.Thread(target=print_number, args=(i,))
+    # Sticks the thread in a list so that it remains accessible
+    thread_list.append(t)
 
-for z in range(5):
-    print(z)
+# Starts threads
+for thread in thread_list:
+    thread.start()
+
+# This blocks the calling thread until the thread whose join() method is called is terminated.
+# From http://docs.python.org/2/library/threading.html#thread-objects
+for thread in thread_list:
+    thread.join()
+
+# Demonstrates that the main process waited for threads to complete
+print ("Done")
