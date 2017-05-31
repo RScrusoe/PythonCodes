@@ -3,22 +3,10 @@
 from bs4 import BeautifulSoup
 import urllib
 import urllib.request
-import re
-import os
-import csv
-import re
 import requests
-import time
-import urllib
-import requests
-import random
-#from tkinter import *
-#import pdfcrowd
 
-
-
-from random import choice
-
+#If you open any wikipedia article, and start clicking on the first link, you will end up on Philosophy article.
+#This program proves it
 
 
 time1 = time.time()
