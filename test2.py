@@ -40,26 +40,13 @@ def make_soup(url):
     soup = BeautifulSoup(data,'html.parser')
     return soup
 
-url = "http://wits.worldbank.org/countrystats.aspx?lang=en"
-soup = make_soup(url)
-l = []
-for i in soup.findAll('h3',{"class":"countryHeading"}):
-    
-    for j in i.findAll('a'):
-        l.append([j.text,j['href']])
-#print(l)        ## Contains country name and their url
+url = "https://what-if.xkcd.com/"
+#soup = make_soup(url)
+l=[]
+for i in range(150,153):
+    urll = url +  str(i) + '/'
+    soup = make_soup(urll)
+    l.append(soup)
 
-for i in l:
-    url = i[1]
-    soup = make_soup(url)
-    tmp = []
-    for j in soup.findAll('td',{"class":"data  importIndicator alignRight"}):
-        tmp.append(j.text)
-    (l[l.index(i)]).append(tmp[0])
-    (l[l.index(i)]).append(tmp[1])
-    
 for i in l:
     print(i)
-
-    
-    
