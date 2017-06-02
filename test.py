@@ -19,9 +19,6 @@ import random
 
 from random import choice
 
-
-
-time1 = time.time()
 user_agents = [
     'Mozilla/5.0 (Windows; U; Windows NT 5.1; it; rv:1.8.1.11) Gecko/20071127 Firefox/2.0.0.11',
     'Opera/9.25 (Windows NT 5.1; U; en)',
@@ -45,31 +42,13 @@ def make_soup(url):
     soup = BeautifulSoup(data,'html.parser')
     return soup
 
+url = 'http://dl2.my98music.com/Data/Serial/Better%20Call%20Saul/Season%202/'
+l = []
+soup = make_soup(url)
+print('@@')
+for i in soup.findAll('a'):
+    if '480' in str(i['href']):
+        l.append(url + i['href'])
 
-
-next_url = 'https://en.wikipedia.org/wiki/Prison'
-
-heading = []
-
-for x in range(50):
-
-    soup = make_soup(next_url)
-
-    for i in soup.findAll('p'):
-        if '<a' not in str(i):
-            continue
-        elif ('<td' == str(i.parent)[:3]):
-            continue
-        else:
-            
-            for j in i.findAll('a'):
-                if ('commons' in str(j)) or ('File' in str(j)) or ('Help' in str(j)) or ('Media' in str(j)) or ('cite' in str(j)) or ('Ancient_Greek' in str(j)) or ('wiktionary' in str(j)) : 
-                    continue
-
-                else:
-                    print(j.text)
-                    next_url = 'https://en.wikipedia.org' + j['href']
-                    break
-            break
-    if 'Philosophy' in next_url:
-        break
+for i in l:
+    print(i)
