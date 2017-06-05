@@ -42,11 +42,5 @@ def make_soup(url):
 
 url = "https://what-if.xkcd.com/"
 #soup = make_soup(url)
-l=[]
-for i in range(150,153):
-    urll = url +  str(i) + '/'
-    soup = make_soup(urll)
-    l.append(soup)
 
-for i in l:
-    print(i)
+

@@ -6,6 +6,7 @@ import urllib.request
 import requests
 from random import choice
 from tkinter import *
+import itertools
 #If you open any wikipedia article, and start clicking on the first link, you will end up on Philosophy article.
 #This program proves it
 
@@ -30,30 +31,25 @@ def make_soup(url):
     soup = BeautifulSoup(data,'html.parser')
     return soup
 
+#import sys
+# n = int(input().strip())
+# l = list(map(int,input().strip().split(' ')))
 
-def Dict(event):
-    word = entry.get()
-    url = 'http://www.khandbahale.com/marathi-dictionary-translation-of-' + word
-    soup = make_soup(url)
+#F090866
 
-    let = 1
-    meaning = ''
-    for i in soup.findAll('div',{"class":"list-group"}):
-        if let == 1:
-            let =0;
-            continue
-        for j in i.findAll('a'):
-            # print(j.text.split()[2])
-            meaning = meaning + '\n' + j.text.split()[2]
-        break
-    res.configure(text = "Meaning: " + meaning)
+l = list('mobile')
+permut_words = []
+for i in range(2,len(l)+1):
+    permut_words.extend([list(j) for j in itertools.permutations(l,i)])
 
 
-w = Tk()
-Label(w, text="Enter Word:").pack()
-entry = Entry(w)
-entry.bind("<Return>", Dict)
-entry.pack()
-res = Label(w)
-res.pack()
-w.mainloop()
+f = open('/usr/share/dict/american-english','r')
+words = [i.strip() for i in f]
+for j in permut_words:
+    
+    s = ''
+    for i in j:
+        s+=i
+    #print(s)
+    if s in words:
+        print(s)

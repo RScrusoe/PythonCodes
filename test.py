@@ -14,7 +14,7 @@ import requests
 import random
 #from tkinter import *
 #import pdfcrowd
-
+import intertools
 
 
 from random import choice
@@ -52,3 +52,6 @@ for i in soup.findAll('a'):
 
 for i in l:
     print(i)
+
+
+    
