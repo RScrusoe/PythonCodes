@@ -31,29 +31,32 @@ def make_soup(url):
     return soup
 
 
-def Dict(event):
-    word = entry.get()
-    url = 'http://www.khandbahale.com/marathi-dictionary-translation-of-' + word
-    soup = make_soup(url)
+def mdict():
+    def Dict(event):
+        word = entry.get()
+        url = 'http://www.khandbahale.com/marathi-dictionary-translation-of-' + word
+        soup = make_soup(url)
 
-    let = 1
-    meaning = ''
-    for i in soup.findAll('div',{"class":"list-group"}):
-        if let == 1:
-            let =0;
-            continue
-        for j in i.findAll('a'):
-            # print(j.text.split()[2])
-            meaning = meaning + '\n' + j.text.split()[2]
-        break
-    res.configure(text = "Meaning: " + meaning)
+        let = 1
+        meaning = ''
+        for i in soup.findAll('div',{"class":"list-group"}):
+            if let == 1:
+                let =0;
+                continue
+            for j in i.findAll('a'):
+                # print(j.text.split()[2])
+                meaning = meaning + '\n' + j.text.split()[2]
+            break
+        res.configure(text = "Meaning: " + meaning)
 
 
-w = Tk()
-Label(w, text="Enter Word:").pack()
-entry = Entry(w)
-entry.bind("<Return>", Dict)
-entry.pack()
-res = Label(w)
-res.pack()
-w.mainloop()
+    w = Tk()
+    Label(w, text="Enter Word:").pack()
+    entry = Entry(w)
+    entry.bind("<Return>", Dict)
+    entry.pack()
+    res = Label(w)
+    res.pack()
+    w.mainloop()
+
+mdict()
