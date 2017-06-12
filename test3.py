@@ -1,10 +1,21 @@
 from rohan import *
 
-print(isPrime(5))
 
 # n = int(input().strip())
 # l = list(map(int,input().strip().split(' ')))
-mdict()
 #F090866
 
- 
+from subprocess import call
+
+
+p = '123'
+l = [list(i) for i in itertools.permutations(p)]
+#call('gpg', 'aa.gpg')
+
+print(l)
+x = 4373612677928697257861252602371390152816537558161613618621437993378423467772036
+y = 36875131794129999827197811565225474825492979968971970996283137471637224634055579
+z = 154476802108746166441951315019919837485664325669565431700026634898253202035277999
+t1 = time.time()
+ans = x/(y+z) + y/(x+z) + z/(x+y)
+print(time.time())
