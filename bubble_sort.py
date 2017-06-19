@@ -21,7 +21,7 @@ def bubble_sort(l):
 		
 		if not flag:
 			ans.append(i)
-		return ans
+	return ans
 		
 
 t1 = time.time()

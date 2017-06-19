@@ -1,6 +1,6 @@
 from rohan import *
 
-url = 'http://dl2.my98music.com/Data/Serial/Gotham/S02/'
+url = 'http://dl2.my98music.com/Data/Serial/Gotham/S03/'
 l = []
 soup = make_soup(url)
 print('@@')
