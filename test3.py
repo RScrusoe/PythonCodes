@@ -39,20 +39,9 @@ import sys
 # your code goes here
 
 
-n=100
-l = [random.randint(0,99) for i in range(100)]
-print(l)
-d={}
-for i in range(0,100):
-    d[i]=0
-#print(d)
-for i in l:
-    d[i] +=1
+# count, bins, ignored = plt.hist(vspeed, 30, normed=True)
+# plt.plot(bins, 1/(sigma * np.sqrt(2 * np.pi)) *
+#                 np.exp( - (bins - mu)**2 / (2 * sigma**2) ),
+#           linewidth=2, color='r')
 
-for i in d.keys():
-    print(d[i],end=" ")
-
-f = open('zip','a')
-for i in range(100000000):
-    f.write('0')
-f.close()
+# plt.show()
