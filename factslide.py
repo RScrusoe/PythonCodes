@@ -3,26 +3,20 @@ from multiprocessing.dummy import Pool as ThreadPool
 
 l=[]
 ul=[]
-ind = [i for i in range(1,1001)]
 
 
 def factslide(x):
 	
 	soup = make_soup('http://www.factslides.com' + str(x))
 
-	for i in soup.findAll('li',{'itemprop':'itemListElement'}):
-		l.append(i.text)
+	for i in soup.findAll('div',{'class':'i'}):
+		aa = str(i.text).strip().replace('\n',' ')
+		if not(aa == '' or aa =='\n'):
+			l.append(aa) 
 
-
-# for i in range(1,6):
-# 	factslide(i)
-
-# for i,j in enumerate(l):
-# 	print(i,end='-->')
-# 	print(j)
 
 def prep_list():
-	url = 'http://www.factslides.com/s-Indonesia'
+	url = 'http://www.factslides.com/s-Pluto'
 	soup = make_soup(url)
 
 	for i in soup.findAll('div',{'id':'slideshows_menu_left'}):
@@ -32,12 +26,10 @@ def prep_list():
 				
 prep_list()
 
-
-
 with ThreadPool(20) as pool:
     results = pool.map(factslide, ul)
 
 
 for i,j in enumerate(l):
-	print(i+9444,end='-->')
+	print(i+1,end='-->')
 	print(j)
