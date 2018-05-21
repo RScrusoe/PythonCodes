@@ -1,15 +1,34 @@
-from rohan import *
-import os
-os.environ['TF_CPP_MIN_LOG_LEVEL']='2'
-import tensorflow as tf
 import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
 
-import tkinter as tk
-from tkinter import filedialog
 
-root = tk.Tk()
-root.withdraw()
+df = pd.read_csv('WorldHappinessIndex.csv')
+headers = df.columns.values 
 
-file_path = filedialog.askopenfilename()
-print(file_path)
+print(headers)
 
+rank = df.loc[0:,"Happiness Rank"]
+score = df.loc[0:,"Happiness Score"]
+capita_gdp = df.loc[0:,"Economy (GDP per Capita)"]
+health = df.loc[0:,'Health (Life Expectancy)']
+trust = df.loc[0:,'Trust (Government Corruption)']
+
+
+score = (rank - rank.min())/rank.max()
+capita_gdp = (capita_gdp - capita_gdp.min())/capita_gdp.max()
+health = (health - health.min())/health.max()
+trust = (trust- trust.min())/trust.max()
+
+plt.plot(rank,score,label = 'Happines Score')
+plt.plot(rank,capita_gdp,label = 'Per Capita GDP')
+plt.plot(rank,health,label='Health (Life Expenctancy)')
+plt.legend()
+plt.xlabel('Happiness Rank')
+plt.ylabel('Normalized Index')
+
+plt.figure('Health vs GDP')
+plt.plot(capita_gdp,trust)
+
+
+plt.show()

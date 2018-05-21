@@ -4,3 +4,5 @@
 *.mp4
 *.jpeg
 *.mkv
+__pycache__/*
+asc.html
